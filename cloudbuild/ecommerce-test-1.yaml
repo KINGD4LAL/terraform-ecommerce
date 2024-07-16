@@ -1,0 +1,39 @@
+steps:
+  - id: "init"
+    name: "hashicorp/terraform:1.7.4"
+    entrypoint: "sh"
+    args:
+      - "-c"
+      - |
+        set -x
+        terraform init -backend-config="bucket=$PROJECT_ID-tfstate"
+  - id: "test"
+    name: "hashicorp/terraform:1.7.4"
+    entrypoint: "sh"
+    args:
+      - "-c"
+      - |
+        set -x
+        echo "Running tests"
+        if terraform test -var="project=$PROJECT_ID" | grep -B 10000 -A 10000 '0 failed'; then
+          echo "All tests have passed"
+        else 
+          echo "Some tests failed"
+          exit 1
+        fi
+    waitFor: ["init"]
+  - id: "plan-apply"
+    name: "hashicorp/terraform:1.7.4"
+    entrypoint: "sh"
+    args:
+      - "-c"
+      - |
+        set -x
+        terraform apply \
+        -auto-approve \
+        -var="project=$PROJECT_ID" \
+        -var="terraform_trigger_branch=$_TERRAFORM_TRIGGER" \
+    waitFor: ["test"]
+    automapSubstitutions: true
+substitutions:
+  _TERRAFORM_TRIGGER: "main"
