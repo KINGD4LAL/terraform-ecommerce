@@ -20,3 +20,9 @@ variable "terraform_trigger_branch" {
   description = "terraform trigger branch"
   default     = "main"
 }
+
+variable "cloudbuild_notification_email" {
+  type        = string
+  description = "The email address to send notifications to"
+  default     = "hamzahdalal12@gmail.com"
+}
