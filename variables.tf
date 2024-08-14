@@ -6,13 +6,13 @@ variable "project" {
 variable "region" {
   type = string
   description = "The region where the resources will be created"
-  default = "europe-west2"
+  default = "europe-west1"
 }
 
 variable "zone" {
     type = string
     description = "The zone where the resources will be created"
-    default = "europe-west2"
+    default = "europe-west1-a"
 }
 
 variable "terraform_trigger_branch" {
