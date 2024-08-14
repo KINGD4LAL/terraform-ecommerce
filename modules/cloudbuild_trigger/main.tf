@@ -7,13 +7,14 @@ locals {
 }
 
 resource "google_cloudbuild_trigger" "trigger" {
-  name     = var.trigger_name
-  project  = var.project
-  location = var.region
+  name            = var.trigger_name
+  project         = var.project
+  location        = var.region
+  service_account = var.service_account
     
   github {
-    owner = "KINGD4LAL"
-    name  = "terraform-ecommerce"
+    owner = var.github_owner
+    name  = var.github_name
     push {
       branch = try(local.cloud_trigger_branch_mapping[var.project], var.cloudbuild_trigger_branch)
     }

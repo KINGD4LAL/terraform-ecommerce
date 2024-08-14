@@ -15,6 +15,12 @@ locals {
 
 data "google_project" "project" {}
 
+resource "google_service_account" "cloudbuild" {
+  account_id   = "cloudbuild"
+  project      = var.project
+  display_name = "Cloudbuild Service Account"
+}
+
 resource "google_project_iam_member" "cloudbuild" {
   depends_on = [module.project-services]
   for_each   = local.cloudbuild_account_roles

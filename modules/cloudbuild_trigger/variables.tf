@@ -3,6 +3,11 @@ variable "project" {
   description = "The ID of the Google Cloud project."
 }
 
+variable "service_account" {
+  type        = string
+  description = "The service account for the Cloud Build triggers."
+}
+
 variable "region" {
   type        = string
   description = "The region for the Cloud Build triggers."
@@ -18,6 +23,12 @@ variable "cloudbuild_trigger_branch" {
 variable "github_name" {
   type        = string
   description = "The github name"
+}
+
+variable "github_owner" {
+  type        = string
+  description = "The Owner of the github repo"
+  default     = "KINGD4LAL"
 }
 
 variable "trigger_name" {

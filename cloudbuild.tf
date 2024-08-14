@@ -1,10 +1,11 @@
 module "terraform" {
-    depends_on                = [module.project-services]
+    depends_on                = [module.project-services, google_project_iam_member.cloudbuild]
     source                    = "./modules/cloudbuild_trigger"
-    trigger_name              = "terraform-trigger"
     project                   = var.project
     github_name               = "terraform-ecommerce"
+    trigger_name              = "terraform-trigger"
     filename                  = "./cloudbuild/${var.project}.yaml"
+    service_account           = "projects/${var.project}/serviceAccounts/${google_service_account.cloudbuild.email}"
     cloudbuild_trigger_branch = var.terraform_trigger_branch
 }
 
