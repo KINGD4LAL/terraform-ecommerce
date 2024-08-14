@@ -37,3 +37,5 @@ steps:
     automapSubstitutions: true
 substitutions:
   _TERRAFORM_TRIGGER: "main"
+options:
+  logging: CLOUD_LOGGING_ONLY
