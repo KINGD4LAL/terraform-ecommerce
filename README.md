@@ -11,7 +11,7 @@ gcloud auth application-default login
 gcloud auth login
 ```
 
-2. If the google project DOES exists then run:
+2. If the google project DOES exists then run this:
 
 ```bash
 chmod +x ./scripts/target-project.sh
