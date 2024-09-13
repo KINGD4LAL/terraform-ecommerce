@@ -27,5 +27,5 @@ resource "google_project_iam_member" "cloudbuild" {
   for_each   = local.cloudbuild_account_roles
   project    = var.project
   role       = each.value
-  member     = "serviceAccount:${data.google_project.project.number}@cloudbuild.gserviceaccount.com"
+  member     = "serviceAccount:${google_service_account.cloudbuild.email}"
 }
