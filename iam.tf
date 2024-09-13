@@ -4,6 +4,7 @@ locals {
     "cloudrunadmin"        = "roles/run.admin"
     "computeviewer"        = "roles/compute.viewer"
     "loggingviewer"        = "roles/logging.viewer"
+    "loggingwriter"        = "roles/logging.logWriter"
     "monitoringviewer"     = "roles/monitoring.viewer"
     "roleviewer"           = "roles/iam.roleViewer"
     "serviceaccountviewer" = "roles/iam.serviceAccountViewer"
