@@ -11,7 +11,7 @@ variable "service_account" {
 variable "region" {
   type        = string
   description = "The region for the Cloud Build triggers."
-  default     = "global"
+  default     = "europe-west1"
 }
 
 variable "cloudbuild_trigger_branch" {
