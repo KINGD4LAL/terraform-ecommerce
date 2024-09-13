@@ -29,3 +29,23 @@ resource "google_project_iam_member" "cloudbuild" {
   role       = each.value
   member     = "serviceAccount:${google_service_account.cloudbuild.email}"
 }
+
+resource "google_service_account_iam_binding" "allow-cloudbuild-act-as" {
+  depends_on         = [google_project_iam_member.cloudbuild]
+  service_account_id = "projects/${var.project}/serviceAccounts/${data.google_project.project.number}-compute@developer.gserviceaccount.com"
+  role               = "roles/iam.serviceAccountUser"
+
+  members = [
+    "serviceAccount:${google_service_account.cloudbuild.email}",
+  ]
+}
+
+resource "google_service_account_iam_binding" "allow-cloudbuild-act-as-cloudbuild" {
+  depends_on         = [google_project_iam_member.cloudbuild]
+  service_account_id = "projects/${var.project}/serviceAccounts/${google_service_account.cloudbuild.email}"
+  role               = "roles/iam.serviceAccountUser"
+
+  members = [
+    "serviceAccount:${google_service_account.cloudbuild.email}",
+  ]
+}
